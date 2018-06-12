@@ -1,25 +1,50 @@
-//
-//  ViewController.swift
-//  google-maps-ios-sample
-//
-//  Created by Akram Hassan on 6/12/18.
-//  Copyright © 2018 aktech. All rights reserved.
-//
-
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    var locationManager:CLLocationManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getCurrentLocationInfo()
+    }
+    
+    
+    func getCurrentLocationInfo() {
+        locationManager = CLLocationManager()
 
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+            //locationManager.startUpdatingHeading()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
 
+         manager.stopUpdatingLocation()
+        
+        print("lat: \(userLocation.coordinate.latitude)")
+        print("lon: \(userLocation.coordinate.longitude)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
+    {
+        print("\(error)")
+    }
 }
-
