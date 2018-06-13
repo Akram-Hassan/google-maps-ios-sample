@@ -11,6 +11,30 @@ class MapViewController: UIViewController {
     override func loadView() {
         mapView = GMSMapView(frame: CGRect.zero)
         view = mapView
+        setupSegmentedControl()
+    }
+    
+    private func setupSegmentedControl() {
+        let segmentedControl
+            = UISegmentedControl(items: ["Mosques", "Banks"])
+        segmentedControl.backgroundColor
+            = UIColor.white.withAlphaComponent(0.5)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
+        
+        let topConstraint =
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                                  constant: 8)
+        let margins = view.layoutMarginsGuide
+        let leadingConstraint =
+            segmentedControl.leadingAnchor.constraint(equalTo: margins.leadingAnchor)
+        let trailingConstraint =
+            segmentedControl.trailingAnchor.constraint(equalTo: margins.trailingAnchor)
+        
+        topConstraint.isActive = true
+        leadingConstraint.isActive = true
+        trailingConstraint.isActive = true
     }
     
     override func viewDidLoad() {
@@ -24,11 +48,12 @@ class MapViewController: UIViewController {
         
         getCurrentLocationInfo()
     }
-    
-    
+}
+
+extension MapViewController: CLLocationManagerDelegate {
     func getCurrentLocationInfo() {
         locationManager = CLLocationManager()
-
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
@@ -38,17 +63,11 @@ class MapViewController: UIViewController {
         }
     }
     
-
-}
-
-extension MapViewController: CLLocationManagerDelegate {
-    
     func animateMapToLocation(location: CLLocation) {
         mapView.animate(toLocation: location.coordinate)
 
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-
         marker.map = mapView
     }
     
