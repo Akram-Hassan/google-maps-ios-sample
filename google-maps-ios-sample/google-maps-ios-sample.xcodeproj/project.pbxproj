@@ -13,7 +13,6 @@
 		7D0B476520CFD67700F2151A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D0B476320CFD67700F2151A /* Main.storyboard */; };
 		7D0B476720CFD67900F2151A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0B476620CFD67900F2151A /* Assets.xcassets */; };
 		7D0B476A20CFD67900F2151A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D0B476820CFD67900F2151A /* LaunchScreen.storyboard */; };
-		7D5C6C2120D0C86B004B5D6B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C6C2020D0C86B004B5D6B /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,7 +25,6 @@
 		7D0B476620CFD67900F2151A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D0B476920CFD67900F2151A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D0B476B20CFD67900F2151A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D5C6C2020D0C86B004B5D6B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		E40EB2B4386997F2930C4B56 /* Pods_google_maps_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_google_maps_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -63,7 +61,6 @@
 		7D0B475E20CFD67700F2151A /* google-maps-ios-sample */ = {
 			isa = PBXGroup;
 			children = (
-				7D5C6C1F20D0C858004B5D6B /* Model */,
 				7D0B475F20CFD67700F2151A /* AppDelegate.swift */,
 				7D0B476120CFD67700F2151A /* MapViewController.swift */,
 				7D0B476320CFD67700F2151A /* Main.storyboard */,
@@ -72,14 +69,6 @@
 				7D0B476B20CFD67900F2151A /* Info.plist */,
 			);
 			path = "google-maps-ios-sample";
-			sourceTree = "<group>";
-		};
-		7D5C6C1F20D0C858004B5D6B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				7D5C6C2020D0C86B004B5D6B /* Location.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		AC62035BD291B91EB8932B40 /* Pods */ = {
@@ -214,7 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D0B476220CFD67700F2151A /* MapViewController.swift in Sources */,
-				7D5C6C2120D0C86B004B5D6B /* Location.swift in Sources */,
 				7D0B476020CFD67700F2151A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

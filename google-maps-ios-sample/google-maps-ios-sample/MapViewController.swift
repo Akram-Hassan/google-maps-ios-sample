@@ -25,7 +25,6 @@ class MapViewController: UIViewController {
         let segmentedControl
             = UISegmentedControl(items: ["Mosques", "Banks"])
         segmentedControl.backgroundColor = UIColor.white
-        segmentedControl.tintColor = UIColor.orange
         
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self,
@@ -86,6 +85,12 @@ class MapViewController: UIViewController {
 
 //Map and Location Functionality
 extension MapViewController: CLLocationManagerDelegate {
+    enum PlaceType:String { case Mosque, Bank }
+    
+    private func getPlaceUrl(forType: PlaceType) -> String {
+        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(userLocation.coordinate.latitude),\(userLocation.coordinate.latitude)&radius=5000&type=\(forType.rawValue)&key=\(GoogleApiKey)"
+    }
+    
     func getCurrentLocationInfo() {
         locationManager = CLLocationManager()
         
