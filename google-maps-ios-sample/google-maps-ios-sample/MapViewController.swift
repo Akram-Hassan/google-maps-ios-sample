@@ -5,20 +5,12 @@ import GoogleMaps
 class MapViewController: UIViewController {
 
     private var locationManager:CLLocationManager!
-
+    private var userLocation:CLLocation!
+    private var mapView : GMSMapView!
+    
     override func loadView() {
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView = GMSMapView(frame: CGRect.zero)
         view = mapView
-        
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
     }
     
     override func viewDidLoad() {
@@ -51,13 +43,22 @@ class MapViewController: UIViewController {
 
 extension MapViewController: CLLocationManagerDelegate {
     
+    func animateMapToLocation(location: CLLocation) {
+        mapView.animate(toLocation: location.coordinate)
+
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+
+        marker.map = mapView
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0] as CLLocation
+        userLocation = locations[0] as CLLocation
         
         manager.stopUpdatingLocation()
         
-        print("lat: \(userLocation.coordinate.latitude)")
-        print("lon: \(userLocation.coordinate.longitude)")
+        animateMapToLocation(location: userLocation)
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
