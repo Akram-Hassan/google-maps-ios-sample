@@ -14,12 +14,7 @@ import GoogleMaps
 
 //Map and Location Functionality
 extension MapViewController: CLLocationManagerDelegate {
-    enum PlaceType:String { case Mosque, Bank }
-    
-    private func getPlaceUrl(forType: PlaceType) -> String {
-        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(userLocation.coordinate.latitude),\(userLocation.coordinate.latitude)&radius=5000&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
-    }
-    
+
     func getCurrentLocationInfo() {
         locationManager = CLLocationManager()
         
@@ -57,6 +52,17 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
         print("\(error)")
+    }
+    
+    @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
+        switch segControl.selectedSegmentIndex {
+        case 0:
+            showMosqueLocations()
+        case 1:
+            showBankLocations()
+        default:
+            break
+        }
     }
 }
 

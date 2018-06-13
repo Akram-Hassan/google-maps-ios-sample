@@ -70,8 +70,8 @@
 				7D5C6C2220D10D2A004B5D6B /* MapViewController - Map and Location.swift */,
 				7D5C6C2420D10D98004B5D6B /* MapViewController - Networking.swift */,
 				7D0B476320CFD67700F2151A /* Main.storyboard */,
-				7D0B476620CFD67900F2151A /* Assets.xcassets */,
 				7D0B476820CFD67900F2151A /* LaunchScreen.storyboard */,
+				7D0B476620CFD67900F2151A /* Assets.xcassets */,
 				7D0B476B20CFD67900F2151A /* Info.plist */,
 			);
 			path = "google-maps-ios-sample";
@@ -106,6 +106,7 @@
 				7D0B475920CFD67700F2151A /* Frameworks */,
 				7D0B475A20CFD67700F2151A /* Resources */,
 				BC032361BDB396651780D0CC /* [CP] Copy Pods Resources */,
+				48B1347BE4A3F3553E9AC399 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,6 +180,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		48B1347BE4A3F3553E9AC399 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-google-maps-ios-sample/Pods-google-maps-ios-sample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-google-maps-ios-sample/Pods-google-maps-ios-sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC032361BDB396651780D0CC /* [CP] Copy Pods Resources */ = {
@@ -358,10 +377,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "google-maps-ios-sample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aktech.google-maps-ios-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -376,10 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "google-maps-ios-sample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aktech.google-maps-ios-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

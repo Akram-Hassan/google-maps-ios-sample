@@ -9,6 +9,8 @@ class MapViewController: UIViewController {
     var userLocation:CLLocation!
     var mapView : GMSMapView!
     let zoomLevel: Float = 15
+    let radius = 50000
+    var selectedPlaces: [String] = []
     
     override func loadView() {
         setupMap()
@@ -61,17 +63,6 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         
         getCurrentLocationInfo()
-    }
-    
-    @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
-        switch segControl.selectedSegmentIndex {
-        case 0:
-            showMosqueLocations()
-        case 1:
-            showBankLocations()
-        default:
-            break
-        }
     }
 }
 

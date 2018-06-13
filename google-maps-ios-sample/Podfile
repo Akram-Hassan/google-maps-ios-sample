@@ -8,4 +8,5 @@ target 'google-maps-ios-sample' do
   # Pods for google-maps-ios-sample
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Alamofire', '~> 4.7'
 end
