@@ -62,12 +62,20 @@ class MapViewController: UIViewController {
     @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
-            print("Mosques")
+            showMosqueLocations()
         case 1:
-            print("Banks")
+            showBankLocations()
         default:
             break
         }
+    }
+    
+    func showMosqueLocations() {
+        print("Mosques")
+    }
+    
+    func showBankLocations() {
+        print("Banks")
     }
 }
 
