@@ -8,6 +8,7 @@ class MapViewController: UIViewController {
     private var locationManager:CLLocationManager!
     private var userLocation:CLLocation!
     private var mapView : GMSMapView!
+    private let zoomLevel: Float = 15
     
     override func loadView() {
         setupMap()
@@ -24,6 +25,7 @@ class MapViewController: UIViewController {
         let segmentedControl
             = UISegmentedControl(items: ["Mosques", "Banks"])
         segmentedControl.backgroundColor = UIColor.white
+        segmentedControl.tintColor = UIColor.orange
         
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self,
@@ -96,23 +98,25 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
     
-    func animateMapToLocation(location: CLLocation) {
-        mapView.animate(toZoom: 15)
-        mapView.animate(toLocation: location.coordinate)
+    func showMapLocation(location: CLLocation) {
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
+                                              zoom: zoomLevel)
 
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         marker.map = mapView
-        
+
+        mapView.camera = camera
         mapView.isHidden = false
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations[0] as CLLocation
+        userLocation = locations.last
         
         manager.stopUpdatingLocation()
         
-        animateMapToLocation(location: userLocation)
+        showMapLocation(location: userLocation)
         
     }
     
