@@ -10,24 +10,27 @@ class MapViewController: UIViewController {
     private var mapView : GMSMapView!
     
     override func loadView() {
+        setupMap()
+        setupSegmentedControl()
+    }
+    
+    private func setupMap() {
         mapView = GMSMapView(frame: CGRect.zero)
         view = mapView
-        setupSegmentedControl()
+        mapView.isHidden = true
     }
     
     private func setupSegmentedControl() {
         let segmentedControl
             = UISegmentedControl(items: ["Mosques", "Banks"])
+        segmentedControl.backgroundColor = UIColor.white
         
-        segmentedControl.backgroundColor
-            = UIColor.white.withAlphaComponent(0.5)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self,
                                    action: #selector(MapViewController.mapTypeChanged(_:)),
                                    for: .valueChanged)
         
-        segmentedControl.backgroundColor
-            = UIColor.white.withAlphaComponent(0.5)
+
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
@@ -94,11 +97,14 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func animateMapToLocation(location: CLLocation) {
+        mapView.animate(toZoom: 15)
         mapView.animate(toLocation: location.coordinate)
 
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         marker.map = mapView
+        
+        mapView.isHidden = false
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
