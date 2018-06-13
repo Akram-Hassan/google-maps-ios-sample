@@ -2,6 +2,7 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 
+//High Level Functionlaity
 class MapViewController: UIViewController {
 
     private var locationManager:CLLocationManager!
@@ -17,6 +18,14 @@ class MapViewController: UIViewController {
     private func setupSegmentedControl() {
         let segmentedControl
             = UISegmentedControl(items: ["Mosques", "Banks"])
+        
+        segmentedControl.backgroundColor
+            = UIColor.white.withAlphaComponent(0.5)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self,
+                                   action: #selector(MapViewController.mapTypeChanged(_:)),
+                                   for: .valueChanged)
+        
         segmentedControl.backgroundColor
             = UIColor.white.withAlphaComponent(0.5)
         segmentedControl.selectedSegmentIndex = 0
@@ -35,6 +44,7 @@ class MapViewController: UIViewController {
         topConstraint.isActive = true
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
+        
     }
     
     override func viewDidLoad() {
@@ -48,8 +58,20 @@ class MapViewController: UIViewController {
         
         getCurrentLocationInfo()
     }
+    
+    @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
+        switch segControl.selectedSegmentIndex {
+        case 0:
+            print("Mosques")
+        case 1:
+            print("Banks")
+        default:
+            break
+        }
+    }
 }
 
+//Map and Location Functionality
 extension MapViewController: CLLocationManagerDelegate {
     func getCurrentLocationInfo() {
         locationManager = CLLocationManager()
