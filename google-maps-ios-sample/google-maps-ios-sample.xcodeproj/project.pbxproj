@@ -69,8 +69,8 @@
 		7D0B475E20CFD67700F2151A /* google-maps-ios-sample */ = {
 			isa = PBXGroup;
 			children = (
-				7D39048020DA355100B51A95 /* Model */,
 				7D0B475F20CFD67700F2151A /* AppDelegate.swift */,
+				7D39048020DA355100B51A95 /* Model */,
 				7D39048320DBB87F00B51A95 /* Home View Controller */,
 				7D39048620DBB89D00B51A95 /* Location View Controller */,
 				7D0B476320CFD67700F2151A /* Main.storyboard */,
