@@ -1,16 +1,18 @@
 import UIKit
 import CoreLocation
 import GoogleMaps
+import Alamofire
 
 //High Level Functionlaity
-class MapViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     var locationManager:CLLocationManager!
-    var userLocation:CLLocation!
     var mapView : GMSMapView!
+    
     let zoomLevel: Float = 15
     let radius = 50000
-    var selectedPlaces: [String] = []
+    
+    var model = Home()
     
     override func loadView() {
         setupMap()
@@ -29,8 +31,9 @@ class MapViewController: UIViewController {
         segmentedControl.backgroundColor = UIColor.white
         
         segmentedControl.selectedSegmentIndex = 0
+        
         segmentedControl.addTarget(self,
-                                   action: #selector(MapViewController.mapTypeChanged(_:)),
+                                   action: #selector(HomeViewController.mapTypeChanged(_:)),
                                    for: .valueChanged)
         
 
@@ -50,12 +53,10 @@ class MapViewController: UIViewController {
         topConstraint.isActive = true
         leadingConstraint.isActive = true
         trailingConstraint.isActive = true
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     

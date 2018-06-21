@@ -8,13 +8,13 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
-extension MapViewController {
+extension HomeViewController {
     
-    enum PlaceType:String { case Mosque, Bank }
     
     private func getPlaceUrl(forType: PlaceType) -> String {
-        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(userLocation.coordinate.latitude),\(userLocation.coordinate.latitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
+        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(model.userLocation.latitude),\(model.userLocation.latitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
     }
     
     func showMosqueLocations() {

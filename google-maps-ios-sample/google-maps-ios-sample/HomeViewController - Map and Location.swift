@@ -13,7 +13,7 @@ import GoogleMaps
 
 
 //Map and Location Functionality
-extension MapViewController: CLLocationManagerDelegate {
+extension HomeViewController: CLLocationManagerDelegate {
 
     func getCurrentLocationInfo() {
         locationManager = CLLocationManager()
@@ -27,25 +27,28 @@ extension MapViewController: CLLocationManagerDelegate {
         }
     }
     
-    func showMapLocation(location: CLLocation) {
-        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                              longitude: location.coordinate.longitude,
+    func showMapLocation(location: GeoLocation) {
+        let camera = GMSCameraPosition.camera(withLatitude: location.latitude,
+                                              longitude: location.longitude,
                                               zoom: zoomLevel)
         
         let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
         marker.map = mapView
         
         mapView.camera = camera
         mapView.isHidden = false
+        
+        showMosqueLocations()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last
+        let location = locations.last
+        model.userLocation = GeoLocation(longitude: location!.coordinate.longitude as Double, latitude: location!.coordinate.latitude as Double)
         
         manager.stopUpdatingLocation()
         
-        showMapLocation(location: userLocation)
+        showMapLocation(location: model.userLocation)
         
     }
     
@@ -58,8 +61,10 @@ extension MapViewController: CLLocationManagerDelegate {
         switch segControl.selectedSegmentIndex {
         case 0:
             showMosqueLocations()
+            model.locationType = .Mosque
         case 1:
             showBankLocations()
+            model.locationType = .Bank
         default:
             break
         }
