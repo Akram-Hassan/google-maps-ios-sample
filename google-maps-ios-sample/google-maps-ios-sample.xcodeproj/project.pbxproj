@@ -14,6 +14,7 @@
 		7D0B476720CFD67900F2151A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D0B476620CFD67900F2151A /* Assets.xcassets */; };
 		7D0B476A20CFD67900F2151A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D0B476820CFD67900F2151A /* LaunchScreen.storyboard */; };
 		7D39048220DA357E00B51A95 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D39048120DA357E00B51A95 /* Home.swift */; };
+		7D39048520DBB89800B51A95 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D39048420DBB89800B51A95 /* LocationViewController.swift */; };
 		7D5C6C2320D10D2A004B5D6B /* HomeViewController - Map and Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C6C2220D10D2A004B5D6B /* HomeViewController - Map and Location.swift */; };
 		7D5C6C2520D10D98004B5D6B /* HomeViewController - Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5C6C2420D10D98004B5D6B /* HomeViewController - Networking.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		7D0B476920CFD67900F2151A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D0B476B20CFD67900F2151A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D39048120DA357E00B51A95 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		7D39048420DBB89800B51A95 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		7D5C6C2220D10D2A004B5D6B /* HomeViewController - Map and Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController - Map and Location.swift"; sourceTree = "<group>"; };
 		7D5C6C2420D10D98004B5D6B /* HomeViewController - Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController - Networking.swift"; sourceTree = "<group>"; };
 		E40EB2B4386997F2930C4B56 /* Pods_google_maps_ios_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_google_maps_ios_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,9 +71,8 @@
 			children = (
 				7D39048020DA355100B51A95 /* Model */,
 				7D0B475F20CFD67700F2151A /* AppDelegate.swift */,
-				7D0B476120CFD67700F2151A /* HomeViewController.swift */,
-				7D5C6C2220D10D2A004B5D6B /* HomeViewController - Map and Location.swift */,
-				7D5C6C2420D10D98004B5D6B /* HomeViewController - Networking.swift */,
+				7D39048320DBB87F00B51A95 /* Home View Controller */,
+				7D39048620DBB89D00B51A95 /* Location View Controller */,
 				7D0B476320CFD67700F2151A /* Main.storyboard */,
 				7D0B476820CFD67900F2151A /* LaunchScreen.storyboard */,
 				7D0B476620CFD67900F2151A /* Assets.xcassets */,
@@ -86,6 +87,24 @@
 				7D39048120DA357E00B51A95 /* Home.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7D39048320DBB87F00B51A95 /* Home View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7D0B476120CFD67700F2151A /* HomeViewController.swift */,
+				7D5C6C2220D10D2A004B5D6B /* HomeViewController - Map and Location.swift */,
+				7D5C6C2420D10D98004B5D6B /* HomeViewController - Networking.swift */,
+			);
+			path = "Home View Controller";
+			sourceTree = "<group>";
+		};
+		7D39048620DBB89D00B51A95 /* Location View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7D39048420DBB89800B51A95 /* LocationViewController.swift */,
+			);
+			path = "Location View Controller";
 			sourceTree = "<group>";
 		};
 		AC62035BD291B91EB8932B40 /* Pods */ = {
@@ -243,6 +262,7 @@
 				7D0B476220CFD67700F2151A /* HomeViewController.swift in Sources */,
 				7D5C6C2520D10D98004B5D6B /* HomeViewController - Networking.swift in Sources */,
 				7D39048220DA357E00B51A95 /* Home.swift in Sources */,
+				7D39048520DBB89800B51A95 /* LocationViewController.swift in Sources */,
 				7D0B476020CFD67700F2151A /* AppDelegate.swift in Sources */,
 				7D5C6C2320D10D2A004B5D6B /* HomeViewController - Map and Location.swift in Sources */,
 			);
@@ -391,7 +411,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "google-maps-ios-sample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aktech.google-maps-ios-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -406,7 +429,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "google-maps-ios-sample/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aktech.google-maps-ios-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
