@@ -18,16 +18,7 @@ extension HomeViewController {
         return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(model.userLocation.latitude),\(model.userLocation.longitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
     }
     
-    func showMosqueLocations() {
-        print("Mosques")
-        loadSelectedPlaces(forType: .Mosque)
-    }
-    
-    func showBankLocations() {
-        print("Banks")
-        loadSelectedPlaces(forType: .Bank)
-    }
-    
+
     func loadSelectedPlaces(forType: PlaceType)  {
         mapView.clear()
         showCurrentLocationMarker()

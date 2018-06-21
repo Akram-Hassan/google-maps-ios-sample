@@ -32,7 +32,9 @@ extension HomeViewController: CLLocationManagerDelegate {
         
         mapView.isHidden = false
         
-        showMosqueLocations()
+        loadSelectedPlaces(forType: model.locationType)
+        
+        loaded = true
     }
     
     func showCurrentLocationMarker() {
@@ -66,10 +68,10 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch segControl.selectedSegmentIndex {
         case 0:
             model.locationType = .Mosque
-            showMosqueLocations()
+            loadSelectedPlaces(forType: .Mosque)
         case 1:
             model.locationType = .Bank
-            showBankLocations()
+            loadSelectedPlaces(forType: .Bank)
         default:
             break
         }

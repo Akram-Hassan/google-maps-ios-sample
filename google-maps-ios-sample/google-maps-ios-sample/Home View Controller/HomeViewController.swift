@@ -4,13 +4,15 @@ import GoogleMaps
 import Alamofire
 
 //High Level Functionlaity
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, GMSMapViewDelegate {
 
     var locationManager:CLLocationManager!
     var mapView : GMSMapView!
     
     let zoomLevel: Float = 12
     let radius = 5000
+    
+    var loaded: Bool = false
     
     var model = Home()
     
@@ -21,6 +23,7 @@ class HomeViewController: UIViewController {
     
     private func setupMap() {
         mapView = GMSMapView(frame: CGRect.zero)
+        mapView.delegate = self
         view = mapView
         mapView.isHidden = true
     }
@@ -62,8 +65,19 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if loaded == false {
+            getCurrentLocationInfo()
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        print(marker.position)
         
-        getCurrentLocationInfo()
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let locationVC = storyBoard.instantiateViewController(withIdentifier:"Location") as? LocationViewController
+        self.navigationController?.pushViewController(locationVC!, animated: true)
+        
+        return true
     }
 }
 
