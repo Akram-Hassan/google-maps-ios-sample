@@ -9,8 +9,8 @@ class HomeViewController: UIViewController {
     var locationManager:CLLocationManager!
     var mapView : GMSMapView!
     
-    let zoomLevel: Float = 15
-    let radius = 50000
+    let zoomLevel: Float = 12
+    let radius = 5000
     
     var model = Home()
     
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
             = UISegmentedControl(items: ["Mosques", "Banks"])
         segmentedControl.backgroundColor = UIColor.white
         
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = 1
         
         segmentedControl.addTarget(self,
                                    action: #selector(HomeViewController.mapTypeChanged(_:)),

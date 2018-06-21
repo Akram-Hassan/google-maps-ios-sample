@@ -28,18 +28,23 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func showMapLocation(location: GeoLocation) {
-        let camera = GMSCameraPosition.camera(withLatitude: location.latitude,
-                                              longitude: location.longitude,
-                                              zoom: zoomLevel)
+        showCurrentLocationMarker()
         
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-        marker.map = mapView
-        
-        mapView.camera = camera
         mapView.isHidden = false
         
         showMosqueLocations()
+    }
+    
+    func showCurrentLocationMarker() {
+        let camera = GMSCameraPosition.camera(withLatitude: model.userLocation.latitude,
+                                              longitude: model.userLocation.longitude,
+                                              zoom: zoomLevel)
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: model.userLocation.latitude, longitude: model.userLocation.longitude)
+        marker.title = "My location"
+        marker.map = mapView
+
+        mapView.camera = camera
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -60,13 +65,26 @@ extension HomeViewController: CLLocationManagerDelegate {
     @objc func mapTypeChanged(_ segControl: UISegmentedControl) {
         switch segControl.selectedSegmentIndex {
         case 0:
-            showMosqueLocations()
             model.locationType = .Mosque
+            showMosqueLocations()
         case 1:
-            showBankLocations()
             model.locationType = .Bank
+            showBankLocations()
         default:
             break
+        }
+    }
+    
+    func showSelectedPlaces() {
+        
+        for place in model.places {
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: place.location.latitude, longitude: place.location.longitude)
+            let color = model.locationType == .Bank ? UIColor.blue : UIColor.brown
+            marker.icon = GMSMarker.markerImage(with: color)
+            marker.title = place.name
+            marker.snippet = model.locationType.rawValue
+            marker.map = mapView
         }
     }
 }

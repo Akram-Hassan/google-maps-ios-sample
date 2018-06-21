@@ -9,81 +9,54 @@
 import Foundation
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 extension HomeViewController {
     
     
     private func getPlaceUrl(forType: PlaceType) -> String {
-        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(model.userLocation.latitude),\(model.userLocation.latitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
+        return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(model.userLocation.latitude),\(model.userLocation.longitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
     }
     
     func showMosqueLocations() {
         print("Mosques")
-        loadPlacses(forType: .Mosque)
+        loadSelectedPlaces(forType: .Mosque)
     }
     
     func showBankLocations() {
         print("Banks")
-        loadPlacses(forType: .Bank)
+        loadSelectedPlaces(forType: .Bank)
     }
     
-    func loadPlacses(forType: PlaceType) {
-        // Set up the URL request
-        let placeUrl: String = getPlaceUrl(forType: forType)
-        let url = URL(string: placeUrl)
-        let urlRequest = URLRequest(url: url!)
+    func loadSelectedPlaces(forType: PlaceType)  {
+        mapView.clear()
+        showCurrentLocationMarker()
         
-        // set up the session
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        
-        // make the request
-        let task = session.dataTask(with: urlRequest) {
-            (data, response, error) in
-            // check for any errors
-            guard error == nil else {
-                print("error calling URL")
-                print(error!)
-                return
-            }
-            // make sure we got data
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            // parse the result as JSON, since that's what the API provides
-            do {
-                guard let place = try JSONSerialization.jsonObject(with: responseData, options: [])
-                    as? [String: Any] else {
-                        print("error trying to convert data to JSON")
-                        return
+        let webServiceUrl = getPlaceUrl(forType: forType)
+        Alamofire.request(webServiceUrl)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    let results = json["results"]
+                    var places:[Place] = []
+                    
+                    for (_,result):(String, JSON) in results {
+                        let name = result["name"].stringValue
+                        let long = result["geometry"]["location"]["lng"].doubleValue
+                        let lat = result["geometry"]["location"]["lat"].doubleValue
+                        let geoLocation = GeoLocation(longitude: long, latitude: lat)
+                        
+                        places.append( Place(location: geoLocation, name: name) )
+                    }
+                    
+                    self.model.places = places
+                    self.showSelectedPlaces()
+                    
+                case .failure(let error):
+                    print(error)
                 }
-                // now we have the todo
-                // let's just print it to prove we can access it
-                print("The place is: " + place.description)
-                
-                // the todo object is a dictionary
-                // so we just access the title using the "title" key
-                // so check for a title and print it if we have one
-                guard let placeName = place["name"] as? String else {
-                    print("Could not get place title from JSON")
-                    return
-                }
-                print("The place is: " + placeName)
-            } catch  {
-                print("error trying to convert data to JSON")
-                return
-            }
         }
-        task.resume()
-    }
-    
-    func placeLoaded(for: PlaceType) {
-        
-    }
-    
-    
-    func makeGetCall() {
-
     }
 }
