@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, GMSMapViewDelegate {
     
     var loaded: Bool = false
     
-    var model = Home()
+    var model = HomeModel()
     
     override func loadView() {
         setupMap()
@@ -75,9 +75,16 @@ class HomeViewController: UIViewController, GMSMapViewDelegate {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let locationVC = storyBoard.instantiateViewController(withIdentifier:"Location") as? LocationViewController
+        locationVC?.title = marker.title
+        
+        let destinationLocation =  GeoLocation(longitude: marker.position.longitude, latitude: marker.position.latitude)
+        let locationModel = LocationModel(userLocation: model.userLocation, destination: destinationLocation)
+        locationVC?.model = locationModel
+        
         self.navigationController?.pushViewController(locationVC!, animated: true)
         
         return true
     }
+
 }
 

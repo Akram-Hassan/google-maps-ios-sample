@@ -21,6 +21,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="4U3-nY-V6u"/>
+                    <connections>
+                        <segue destination="mkl-8E-rZu" kind="show" id="APK-hS-lSQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

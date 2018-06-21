@@ -11,10 +11,15 @@ import CoreLocation
 
 enum PlaceType: String, Decodable { case Mosque, Bank }
 
-struct Home : Decodable{
+struct HomeModel : Decodable{
     var locationType: PlaceType = .Mosque
     var userLocation:GeoLocation!
     var places: [Place] = []
+}
+
+struct LocationModel {
+    var userLocation:GeoLocation!
+    var destination:GeoLocation!
 }
 
 struct GeoLocation : Decodable  {
