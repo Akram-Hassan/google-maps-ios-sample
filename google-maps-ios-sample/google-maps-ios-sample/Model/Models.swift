@@ -9,9 +9,14 @@
 import Foundation
 import CoreLocation
 
-enum PlaceType: String, Decodable { case Mosque, Bank }
+let zoomLevel: Float = 12
+let radius = 5000
 
-struct HomeModel : Decodable{
+enum PlaceType: String { case Mosque, Bank }
+
+enum DirectionMode: String { case Walking, Driving }
+
+struct HomeModel {
     var locationType: PlaceType = .Mosque
     var userLocation:GeoLocation!
     var places: [Place] = []

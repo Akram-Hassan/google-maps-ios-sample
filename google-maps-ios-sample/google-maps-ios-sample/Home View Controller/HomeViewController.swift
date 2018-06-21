@@ -9,8 +9,7 @@ class HomeViewController: UIViewController, GMSMapViewDelegate {
     var locationManager:CLLocationManager!
     var mapView : GMSMapView!
     
-    let zoomLevel: Float = 12
-    let radius = 5000
+
     
     var loaded: Bool = false
     

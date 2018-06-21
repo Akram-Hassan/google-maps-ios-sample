@@ -13,7 +13,6 @@ import SwiftyJSON
 
 extension HomeViewController {
     
-    
     private func getPlaceUrl(forType: PlaceType) -> String {
         return "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(model.userLocation.latitude),\(model.userLocation.longitude)&radius=\(radius)&type=\(forType.rawValue.lowercased())&key=\(GoogleApiKey)"
     }
